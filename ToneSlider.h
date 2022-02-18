@@ -7,11 +7,12 @@
 
 #include "DistortEdSlider.h"
 
-class ToneSlider: public DistortEdSlider
+class ToneSlider : public DistortEdSlider
 {
-    void sliderValueChanged (juce::Slider* slider) override;
+    using DistortEdSlider::DistortEdSlider;
+public:
+    void intialise () override;
 };
-
 
 
 #endif //DISTORTED_TONESLIDER_H

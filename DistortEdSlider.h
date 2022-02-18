@@ -11,16 +11,19 @@
 
 
 class DistortEdSlider : public juce::Component,
-                   public juce::Slider::Listener
+                        public juce::Slider::Listener
+
 {
 public:
-    DistortEdSlider();
+    DistortEdSlider (std::atomic<float>& value);
     void sliderValueChanged (juce::Slider* slider) override;
-    void resized() override;
-    void setProcessor(DistortEdAudioProcessor* processor);
-private:
-    DistortEdAudioProcessor* m_processor;
+    void resized () override;
+    virtual void intialise() = 0;
+protected:
     juce::Slider m_slider;
+    juce::Label m_label;
+    double m_value {0.0f};
+    std::atomic<float>& atomicValue;
 };
 
 

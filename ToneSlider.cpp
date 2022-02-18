@@ -4,7 +4,6 @@
 
 #include "ToneSlider.h"
 
-void ToneSlider::sliderValueChanged (juce::Slider* slider)
+void ToneSlider::intialise ()
 {
-
 }

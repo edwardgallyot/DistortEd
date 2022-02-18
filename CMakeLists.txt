@@ -84,14 +84,14 @@ target_sources(${projectName}
         PluginProcessor.cpp
         DistortEdSlider.cpp
         DistortEdSlider.h
-        SinOsc.cpp
-        SinOsc.h
-        VolumeSlider.cpp
-        VolumeSlider.h
         DriveSlider.cpp
         DriveSlider.h
+        VolumeSlider.cpp
+        VolumeSlider.h
         ToneSlider.cpp
-        ToneSlider.h)
+        ToneSlider.h
+        SliderBank.cpp
+        SliderBank.h)
 
 # `target_compile_definitions` adds some preprocessor definitions to our target. In a Projucer
 # project, these might be passed in the 'Preprocessor Definitions' field. JUCE modules also make use

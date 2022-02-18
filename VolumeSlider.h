@@ -10,7 +10,10 @@
 
 class VolumeSlider : public DistortEdSlider
 {
-    void sliderValueChanged(juce::Slider *slider) override;
+    using DistortEdSlider::DistortEdSlider;
+public:
+    void intialise () override;
+
 };
 
 

@@ -3,16 +3,15 @@
 
 //==============================================================================
 DistortEdProcessorEditor::DistortEdProcessorEditor (DistortEdAudioProcessor& p)
-    : AudioProcessorEditor (&p), processorRef (p)
+    : AudioProcessorEditor (&p), processorRef (p), sliderBank (p)
 {
     juce::ignoreUnused (processorRef);
     setResizable (false, false);
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
-    setSize (500, 100);
-    addAndMakeVisible (testSlider);
-    addAndMakeVisible (volumeSlider);
-    testSlider.setProcessor (&p);
+    setSize (500, 200);
+
+    addAndMakeVisible(sliderBank);
 }
 
 DistortEdProcessorEditor::~DistortEdProcessorEditor()
@@ -32,8 +31,18 @@ void DistortEdProcessorEditor::paint (juce::Graphics& g)
 
 void DistortEdProcessorEditor::resized()
 {
-    testSlider.setBounds(0, 0, getWidth() / 3, getHeight());
-    volumeSlider.setBounds (getWidth() / 3, 0, getWidth() / 3, getHeight());
+    auto editorSize = getLocalBounds();
+
+    auto headerFooterHeight = 10;
+    auto sideBarWidth = 20;
+
+    auto sliderBankSize = editorSize;
+
+    sliderBankSize.removeFromTop (headerFooterHeight);
+    sliderBankSize.removeFromBottom (headerFooterHeight);
+    sliderBankSize.removeFromLeft (sideBarWidth);
+    sliderBank.setBounds(sliderBankSize);
+
     // This is generally where you'll want to lay out the positions of any
     // subcomponents in your editor..
 }

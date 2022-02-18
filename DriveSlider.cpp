@@ -4,7 +4,7 @@
 
 #include "DriveSlider.h"
 
-void DriveSlider::sliderValueChanged (juce::Slider* slider)
+void DriveSlider::intialise ()
 {
-
+    m_slider.setRange(0, 1, 0.01);
 }

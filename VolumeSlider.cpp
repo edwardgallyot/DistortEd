@@ -4,6 +4,7 @@
 
 #include "VolumeSlider.h"
 
-void VolumeSlider::sliderValueChanged (juce::Slider* slider)
+
+void VolumeSlider::intialise ()
 {
 }
