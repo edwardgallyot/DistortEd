@@ -1,6 +1,8 @@
 #pragma once
 
 #include <JuceHeader.h>
+#include <atomic>
+#include "SinOsc.h"
 
 //==============================================================================
 class DistortEdAudioProcessor  : public juce::AudioProcessor
@@ -42,7 +44,10 @@ public:
     void getStateInformation (juce::MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
 
+    std::atomic<float> freq;
 private:
+    SinOsc sinOsc;
+
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (DistortEdAudioProcessor)
 };

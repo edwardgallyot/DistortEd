@@ -25,16 +25,17 @@ add_compile_definitions(DONT_SET_USING_JUCE_NAMESPACE)
 # included JUCE directly in your source tree (perhaps as a submodule), you'll need to tell CMake to
 # include that subdirectory as part of the build.
 
-list(APPEND CMAKE_PREFIX_PATH "/home/edgallyot/JUCE/cmake-build-install")
+#list(APPEND CMAKE_PREFIX_PATH "/home/edgallyot/JUCE/install")
 
 
-#find_package(JUCE CONFIG REQUIRED)        # If you've installed JUCE to your system
+
+find_package(JUCE CONFIG REQUIRED)        # If you've installed JUCE to your system
 # or
 #MAC
-#add_subdirectory(/Users/edwardgallyot/JUCE bin)
+#add_subdirectory(/Users/edwardgallyot/JUCE)
 
 #LINUX
-add_subdirectory(/home/edgallyot/JUCE bin)
+#add_subdirectory(/home/edgallyot/JUCE)
 # If you are building a VST2 or AAX plugin, CMake needs to be told where to find these SDKs on your
 # system. This setup should be done before calling `juce_add_plugin`.
 
@@ -80,7 +81,17 @@ juce_generate_juce_header(${projectName})
 target_sources(${projectName}
     PRIVATE
         PluginEditor.cpp
-        PluginProcessor.cpp)
+        PluginProcessor.cpp
+        DistortEdSlider.cpp
+        DistortEdSlider.h
+        SinOsc.cpp
+        SinOsc.h
+        VolumeSlider.cpp
+        VolumeSlider.h
+        DriveSlider.cpp
+        DriveSlider.h
+        ToneSlider.cpp
+        ToneSlider.h)
 
 # `target_compile_definitions` adds some preprocessor definitions to our target. In a Projucer
 # project, these might be passed in the 'Preprocessor Definitions' field. JUCE modules also make use
