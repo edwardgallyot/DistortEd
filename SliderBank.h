@@ -11,10 +11,11 @@
 class SliderBank : public juce::Component
 {
 public:
-    SliderBank(DistortEdAudioProcessor& p);
+    SliderBank(DistortEdProcessor&, juce::AudioProcessorValueTreeState&);
     void resized() override;
 private:
-    DistortEdAudioProcessor& processor;
+    DistortEdProcessor& processor;
+    juce::AudioProcessorValueTreeState& parameters;
     VolumeSlider volumeSlider;
     ToneSlider toneSlider;
     DriveSlider driveSlider;

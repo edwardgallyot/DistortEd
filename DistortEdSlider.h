@@ -7,23 +7,28 @@
 
 #include "JuceHeader.h"
 #include <atomic>
-#include "PluginProcessor.h"
+#include <string>
+#include "DistortEdProcessor.h"
+#include "DistortEdAlias.h"
 
 
 class DistortEdSlider : public juce::Component,
-                        public juce::Slider::Listener
-
+                        juce::Slider::Listener
 {
 public:
-    DistortEdSlider (std::atomic<float>& value);
-    void sliderValueChanged (juce::Slider* slider) override;
+    DistortEdSlider (juce::AudioProcessorValueTreeState& treeState, std::string ID, std::string Name);
     void resized () override;
-    virtual void intialise() = 0;
+    virtual void initialise () = 0;
 protected:
+    juce::AudioProcessorValueTreeState& parameters;
+    std::string ID;
+    std::string Name;
     juce::Slider m_slider;
-    juce::Label m_label;
-    double m_value {0.0f};
-    std::atomic<float>& atomicValue;
+    juce::Label m_labelValue;
+    juce::Label m_labelName;
+    std::unique_ptr<SliderAttachment> attachment;
+private:
+    void sliderValueChanged (juce::Slider* slider) override;
 };
 
 

@@ -4,12 +4,21 @@
 
 #include "SliderBank.h"
 
-SliderBank::SliderBank (DistortEdAudioProcessor& p) : processor(p), toneSlider (p.tone),
-                                                      volumeSlider (p.volume), driveSlider(p.drive)
+SliderBank::SliderBank (DistortEdProcessor& p, juce::AudioProcessorValueTreeState& vts) : processor (p),
+                                                                                          parameters (vts),
+                                                                                          volumeSlider (parameters,
+                                                                                                        "vol",
+                                                                                                        "Volume"),
+                                                                                          toneSlider (parameters,
+                                                                                                      "tone",
+                                                                                                      "Tone"),
+                                                                                          driveSlider (parameters,
+                                                                                                       "drv",
+                                                                                                       "Drive")
 {
-    driveSlider.intialise();
-    volumeSlider.intialise();
-    toneSlider.intialise();
+    driveSlider.initialise ();
+    volumeSlider.initialise ();
+    toneSlider.initialise ();
     addAndMakeVisible (driveSlider);
     addAndMakeVisible (volumeSlider);
     addAndMakeVisible (toneSlider);

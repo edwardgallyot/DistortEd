@@ -5,6 +5,7 @@
 #include "VolumeSlider.h"
 
 
-void VolumeSlider::intialise ()
+void VolumeSlider::initialise ()
 {
+    m_slider.setRange(0, 1, 0.001);
 }

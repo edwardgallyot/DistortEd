@@ -10,10 +10,9 @@
 
 class VolumeSlider : public DistortEdSlider
 {
-    using DistortEdSlider::DistortEdSlider;
 public:
-    void intialise () override;
-
+    using DistortEdSlider::DistortEdSlider;
+    void initialise () override;
 };
 
 

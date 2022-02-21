@@ -4,7 +4,7 @@
 
 #include "DriveSlider.h"
 
-void DriveSlider::intialise ()
+void DriveSlider::initialise ()
 {
-    m_slider.setRange(0, 1, 0.01);
+    m_slider.setRange(0, 1, 0.001);
 }

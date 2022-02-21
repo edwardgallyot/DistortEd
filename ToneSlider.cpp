@@ -4,6 +4,7 @@
 
 #include "ToneSlider.h"
 
-void ToneSlider::intialise ()
+void ToneSlider::initialise ()
 {
+    m_slider.setRange(0, 1, 0.001);
 }
