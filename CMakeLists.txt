@@ -77,6 +77,7 @@ juce_generate_juce_header(${projectName})
 # first argument, then a visibility parameter for the sources which should normally be PRIVATE.
 # Finally, we supply a list of source files that will be built into the target. This is a standard
 # CMake command.
+# Are the cmake lists changes happening?
 
 target_sources(${projectName}
     PRIVATE
