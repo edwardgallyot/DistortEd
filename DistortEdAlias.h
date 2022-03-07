@@ -9,5 +9,7 @@
 
 typedef juce::AudioProcessorValueTreeState::SliderAttachment SliderAttachment;
 typedef juce::AudioProcessorValueTreeState::ButtonAttachment ButtonAttachment;
+typedef juce::AudioProcessorGraph::AudioGraphIOProcessor AudioGraphIOProcessor;
+typedef juce::AudioProcessorGraph::Node Node;
 
 #endif //DISTORTED_DISTORTEDALIAS_H

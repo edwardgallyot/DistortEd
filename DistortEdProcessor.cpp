@@ -27,12 +27,28 @@ DistortEdProcessor::DistortEdProcessor ()
                                                                            "Drive",
                                                                            0.0f,
                                                                            1.0f,
-                                                                           0.0f)
-                      })
+                                                                           0.0f),
+                              std::make_unique<juce::AudioParameterBool> ("crsh",
+                                                                          "Crush",
+                                                                          0.0f
+                              ),
+                              std::make_unique<juce::AudioParameterBool> ("rect",
+                                                                          "Rectify",
+                                                                          0.0f
+                              ),
+                              std::make_unique<juce::AudioParameterBool> ("byp",
+                                                                          "Bypass",
+                                                                          0.0f
+                              )
+                      }
+          ),
+
+          mainProcessor (new juce::AudioProcessorGraph ())
 {
     m_volume = parameters.getRawParameterValue ("vol");
     m_tone = parameters.getRawParameterValue ("tone");
     m_drive = parameters.getRawParameterValue ("drv");
+    m_crush = parameters.getRawParameterValue ("crsh");
 }
 
 DistortEdProcessor::~DistortEdProcessor ()
@@ -59,10 +75,13 @@ void DistortEdProcessor::releaseResources ()
 void DistortEdProcessor::processBlock (juce::AudioBuffer<float>& buffer,
                                        juce::MidiBuffer& midiMessages)
 {
+//    std::cout << parameters.getRawParameterValue ("byp")->load () << std::endl;
+
     juce::ignoreUnused (midiMessages);
     juce::ScopedNoDenormals noDenormals;
     auto totalNumInputChannels = getTotalNumInputChannels ();
     auto totalNumOutputChannels = getTotalNumOutputChannels ();
+
     for (auto sample = 0; sample < buffer.getNumSamples (); ++sample)
     {
         for (auto channel = 0; channel < buffer.getNumChannels (); ++channel)
@@ -100,4 +119,8 @@ void DistortEdProcessor::setStateInformation (const void* data, int sizeInBytes)
 juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter ()
 {
     return new DistortEdProcessor ();
+}
+juce::AudioProcessorValueTreeState::ParameterLayout DistortEdProcessor::createParameters ()
+{
+
 }

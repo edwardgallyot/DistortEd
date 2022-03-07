@@ -4,9 +4,13 @@
 
 #include "DistortEdSlider.h"
 
+#include <memory>
 
-DistortEdSlider::DistortEdSlider (juce::AudioProcessorValueTreeState& treeState, std::string ID, std::string Name) : parameters (
-        treeState), ID (ID), Name(Name)
+
+DistortEdSlider::DistortEdSlider (juce::AudioProcessorValueTreeState& treeState, std::string ID, std::string Name) :
+        parameters (treeState),
+        ID (ID),
+        Name (Name)
 {
     // Slider Style
     m_slider.setSliderStyle (juce::Slider::RotaryHorizontalVerticalDrag);
@@ -25,7 +29,7 @@ DistortEdSlider::DistortEdSlider (juce::AudioProcessorValueTreeState& treeState,
     addAndMakeVisible (m_slider);
     addAndMakeVisible (m_labelValue);
     addAndMakeVisible (m_labelName);
-    attachment.reset (new SliderAttachment (treeState, ID, m_slider));
+    attachment = std::make_unique<SliderAttachment> (treeState, ID, m_slider);
 }
 
 void DistortEdSlider::resized ()
@@ -35,10 +39,10 @@ void DistortEdSlider::resized ()
     sliderArea.removeFromTop (labelHeight);
     sliderArea.removeFromBottom (labelHeight);
 
-    auto labelValueArea = getLocalBounds();
-    auto labelNameArea = getLocalBounds();
-    labelValueArea.removeFromTop (sliderArea.getHeight() + labelHeight);
-    labelNameArea.removeFromBottom (sliderArea.getHeight() + labelHeight);
+    auto labelValueArea = getLocalBounds ();
+    auto labelNameArea = getLocalBounds ();
+    labelValueArea.removeFromTop (sliderArea.getHeight () + labelHeight);
+    labelNameArea.removeFromBottom (sliderArea.getHeight () + labelHeight);
 
     m_slider.setBounds (sliderArea);
     m_labelValue.setBounds (labelValueArea);

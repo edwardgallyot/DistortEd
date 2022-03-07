@@ -2,6 +2,7 @@
 
 #include "DistortEdProcessor.h"
 #include "SliderBank.h"
+#include "ButtonBank.h"
 
 
 //==============================================================================
@@ -24,5 +25,9 @@ private:
 
     // Slider Controls
     SliderBank sliderBank;
+
+    // Toggle Switches
+    ButtonBank buttonBank;
+
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (DistortEdEditor)
 };

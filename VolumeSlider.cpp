@@ -7,5 +7,5 @@
 
 void VolumeSlider::initialise ()
 {
-    m_slider.setRange(0, 1, 0.001);
+    m_slider.setRange(0, 1, 0.00001);
 }

@@ -5,8 +5,9 @@
 #ifndef DISTORTED_VOLUMEMODULE_H
 #define DISTORTED_VOLUMEMODULE_H
 
+#include "BaseModule.h"
 
-class VolumeModule
+class VolumeModule : public BaseModule
 {
 
 };

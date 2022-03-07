@@ -9,5 +9,6 @@
 #include "ToneSlider.h"
 #include "VolumeSlider.h"
 #include "DriveSlider.h"
+#include "DistortEdButton.h"
 
 #endif //DISTORTED_CUSTOMSLIDERS_H

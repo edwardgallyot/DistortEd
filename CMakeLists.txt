@@ -51,7 +51,7 @@ juce_add_plugin(${projectName}
         # VERSION ...                               # Set this if the plugin version is different to the project version
         # ICON_BIG ...                              # ICON_* arguments specify a path to an image file to use as an icon for the Standalone
         # ICON_SMALL ...
-        # COMPANY_NAME ...                          # Specify the name of the plugin's author
+        COMPANY_NAME EdFX                          # Specify the name of the plugin's author
         # IS_SYNTH TRUE/FALSE                       # Is this a synth or an effect?
         # NEEDS_MIDI_INPUT TRUE/FALSE               # Does the plugin need midi input?
         # NEEDS_MIDI_OUTPUT TRUE/FALSE              # Does the plugin need midi output?
@@ -98,7 +98,11 @@ target_sources(${projectName}
         VolumeModule.cpp
         VolumeModule.h
         BaseModule.cpp
-        BaseModule.h)
+        BaseModule.h
+        DistortEdButton.cpp
+        DistortEdButton.h
+        ButtonBank.cpp
+        ButtonBank.h)
 
 # `target_compile_definitions` adds some preprocessor definitions to our target. In a Projucer
 # project, these might be passed in the 'Preprocessor Definitions' field. JUCE modules also make use
