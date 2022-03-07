@@ -9,7 +9,7 @@
 
 class BaseProcessor : virtual public juce::AudioProcessor
 {
-    const juce::String getName () const;
+    const juce::String getName () const override;
 
     bool acceptsMidi () const override;
     bool producesMidi () const override;

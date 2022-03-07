@@ -20,6 +20,7 @@ protected:
     juce::AudioProcessorValueTreeState& parameters;
     std::string ID;
     std::string Name;
+    juce::Label m_labelName;
     juce::ToggleButton m_button;
     std::unique_ptr<ButtonAttachment> attachment;
 };

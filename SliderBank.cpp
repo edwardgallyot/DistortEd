@@ -7,7 +7,7 @@
 SliderBank::SliderBank (DistortEdProcessor& p, juce::AudioProcessorValueTreeState& vts) : processor (p),
                                                                                           parameters (vts),
                                                                                           volumeSlider (parameters,
-                                                                                                        "vol",
+                                                                                                        "gainModule",
                                                                                                         "Volume"),
                                                                                           toneSlider (parameters,
                                                                                                       "tone",

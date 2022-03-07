@@ -13,7 +13,7 @@ class ButtonBank : public juce::Component
 {
 public:
     ButtonBank (DistortEdProcessor&, juce::AudioProcessorValueTreeState&);
-    void resized() override;
+    void resized () override;
 protected:
 private:
     DistortEdProcessor& processor;

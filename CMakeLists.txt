@@ -29,6 +29,8 @@ add_compile_definitions(DONT_SET_USING_JUCE_NAMESPACE)
 
 
 find_package(JUCE CONFIG REQUIRED)        # If you've installed JUCE to your system
+add_subdirectory(DistortEd_Algorithms)
+
 # or
 #MAC
 #add_subdirectory(/Users/edwardgallyot/JUCE)
@@ -95,10 +97,11 @@ target_sources(${projectName}
         SliderBank.cpp
         SliderBank.h
         DistortEdAlias.h
-        VolumeModule.cpp
-        VolumeModule.h
-        BaseModule.cpp
-        BaseModule.h
+        GainModule.cpp
+        GainModule.h
+        CubicModule.cpp
+        CubicModule.h
+        DSPModules.h
         DistortEdButton.cpp
         DistortEdButton.h
         ButtonBank.cpp
@@ -133,7 +136,13 @@ target_compile_definitions(${projectName}
 # linked automatically. If we'd generated a binary data target above, we would need to link to it
 # here too. This is a standard CMake command.
 
+include_directories(Wave_io
+        DistortEd_Algorithms
+        )
+
 target_link_libraries(${projectName}
+        PUBLIC
+        DistortEd_Algorithmslib
         PRIVATE
         # AudioPluginData           # If we'd created a binary data target, we'd link to it here
         juce::juce_audio_utils

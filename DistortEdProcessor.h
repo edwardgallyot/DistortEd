@@ -4,6 +4,7 @@
 #include <atomic>
 #include "BaseProcessor.h"
 #include "DistortEdAlias.h"
+#include "DSPModules.h"
 
 // Inheriting from my Base Processor to override some of the JUCE boiler plate
 //==============================================================================
@@ -26,6 +27,9 @@ public:
     juce::AudioProcessorEditor* createEditor () override;
     juce::AudioProcessorValueTreeState::ParameterLayout createParameters();
 
+protected:
+    bool isBusesLayoutSupported (const BusesLayout& layout) const override;
+
 private:
     // Parameters with their tree
     std::atomic<float>* m_volume = nullptr;
@@ -36,10 +40,9 @@ private:
     std::atomic<float>* m_rectify = nullptr;
     juce::AudioProcessorValueTreeState parameters;
 
-    // Adding in Processing Modules with their Graph
-    std::unique_ptr<juce::AudioProcessorGraph> mainProcessor;
-    Node::Ptr audioIn;
-    Node::Ptr audioOut;
+    GainModule gainModule;
+    CubicModule cubicModule;
+
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (DistortEdProcessor)
 };

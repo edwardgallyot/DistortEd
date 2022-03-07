@@ -1,5 +1,6 @@
 #include "DistortEdProcessor.h"
 #include "DistortEdEditor.h"
+#include "DistortEd_Algorithms.h"
 
 //==============================================================================
 DistortEdProcessor::DistortEdProcessor ()
@@ -13,7 +14,7 @@ DistortEdProcessor::DistortEdProcessor ()
 ),
           parameters (*this, nullptr, juce::Identifier ("DistortEdTree"),
                       {
-                              std::make_unique<juce::AudioParameterFloat> ("vol",
+                              std::make_unique<juce::AudioParameterFloat> ("gainModule",
                                                                            "Volume",
                                                                            0.0f,
                                                                            1.0f,
@@ -41,14 +42,15 @@ DistortEdProcessor::DistortEdProcessor ()
                                                                           0.0f
                               )
                       }
-          ),
-
-          mainProcessor (new juce::AudioProcessorGraph ())
+          )
 {
-    m_volume = parameters.getRawParameterValue ("vol");
+    m_volume = parameters.getRawParameterValue ("gainModule");
     m_tone = parameters.getRawParameterValue ("tone");
     m_drive = parameters.getRawParameterValue ("drv");
     m_crush = parameters.getRawParameterValue ("crsh");
+    m_bypass = parameters.getRawParameterValue ("byp");
+    m_rectify = parameters.getRawParameterValue ("rect");
+
 }
 
 DistortEdProcessor::~DistortEdProcessor ()
@@ -64,6 +66,7 @@ void DistortEdProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
     // Use this method as the place to do any pre-playback
     // initialisation that you need..
     juce::ignoreUnused (sampleRate, samplesPerBlock);
+    gainModule.prepare (sampleRate, samplesPerBlock);
 }
 
 void DistortEdProcessor::releaseResources ()
@@ -75,20 +78,26 @@ void DistortEdProcessor::releaseResources ()
 void DistortEdProcessor::processBlock (juce::AudioBuffer<float>& buffer,
                                        juce::MidiBuffer& midiMessages)
 {
-//    std::cout << parameters.getRawParameterValue ("byp")->load () << std::endl;
+
 
     juce::ignoreUnused (midiMessages);
     juce::ScopedNoDenormals noDenormals;
     auto totalNumInputChannels = getTotalNumInputChannels ();
     auto totalNumOutputChannels = getTotalNumOutputChannels ();
 
-    for (auto sample = 0; sample < buffer.getNumSamples (); ++sample)
+    for (int i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
     {
-        for (auto channel = 0; channel < buffer.getNumChannels (); ++channel)
-        {
-            // Do Nothing
-        }
+        buffer.clear (i, 0, buffer.getNumSamples ());
     }
+
+    auto volume = m_volume->load ();
+    auto drive = m_drive->load ();
+
+    cubicModule.process (buffer, midiMessages, drive);
+
+    gainModule.process (buffer, midiMessages, volume);
+
+
 }
 
 //==============================================================================
@@ -124,3 +133,19 @@ juce::AudioProcessorValueTreeState::ParameterLayout DistortEdProcessor::createPa
 {
 
 }
+bool DistortEdProcessor::isBusesLayoutSupported (const juce::AudioProcessor::BusesLayout& layouts) const
+{
+    if (layouts.getMainInputChannelSet () == juce::AudioChannelSet::disabled ()
+        || layouts.getMainOutputChannelSet () == juce::AudioChannelSet::disabled ())
+        return false;
+    if (layouts.getMainOutputChannelSet () != juce::AudioChannelSet::stereo ())
+        return false;
+    if (layouts.getMainInputChannelSet () != juce::AudioChannelSet::stereo ()
+        || layouts.getMainInputChannelSet () != juce::AudioChannelSet::mono ())
+        return true;
+    else
+        return false;
+    return true;
+}
+
+

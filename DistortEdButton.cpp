@@ -11,6 +11,9 @@ DistortEdButton::DistortEdButton (juce::AudioProcessorValueTreeState& treeState,
 {
     m_button.setClickingTogglesState (true);
     addAndMakeVisible (m_button);
+    m_labelName.setText(this->Name, juce::dontSendNotification);
+    addAndMakeVisible (m_labelName);
+
     attachment = std::make_unique<ButtonAttachment>(treeState, this->ID, m_button);
 }
 
@@ -21,6 +24,12 @@ void DistortEdButton::buttonClicked (juce::Button* button)
 
 void DistortEdButton::resized ()
 {
-    m_button.setBounds (getLocalBounds());
+    auto buttonArea = getLocalBounds();
+    auto labelArea = getLocalBounds();
+    buttonArea.removeFromLeft (10);
+    labelArea.removeFromLeft (5);
+    labelArea.removeFromTop (40);
+    m_button.setBounds (buttonArea);
+    m_labelName.setBounds(labelArea);
 }
 
