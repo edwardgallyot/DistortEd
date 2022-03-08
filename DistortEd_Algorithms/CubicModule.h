@@ -5,7 +5,8 @@
 #ifndef DISTORTED_CUBICMODULE_H
 #define DISTORTED_CUBICMODULE_H
 
-#include "JuceHeader.h"
+#include "juce_audio_utils/juce_audio_utils.h"
+#include "juce_gui_extra/juce_gui_extra.h"
 #include "DistortEd_Algorithms.h"
 
 class  CubicModule
@@ -17,7 +18,6 @@ public:
 private:
     juce::SmoothedValue<float, juce::ValueSmoothingTypes::Linear> smoothedValue;
     float (& dsp) (float, float) = DistortEdAlgorithms::processCubicClip<float>;
-
 };
 
 

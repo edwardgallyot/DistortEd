@@ -12,6 +12,7 @@ class ToneSlider : public DistortEdSlider
 public:
     using DistortEdSlider::DistortEdSlider;
     void initialise () override;
+    void sliderValueChanged (juce::Slider* slider) override;
 };
 
 

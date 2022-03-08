@@ -97,15 +97,26 @@ target_sources(${projectName}
         SliderBank.cpp
         SliderBank.h
         DistortEdAlias.h
-        GainModule.cpp
-        GainModule.h
-        CubicModule.cpp
-        CubicModule.h
-        DSPModules.h
         DistortEdButton.cpp
         DistortEdButton.h
         ButtonBank.cpp
-        ButtonBank.h)
+        ButtonBank.h
+        DistortEd_Algorithms/CubicModule.h
+        DistortEd_Algorithms/DSPModules.h
+        DistortEd_Algorithms/CubicModule.cpp
+        DistortEd_Algorithms/DistortEd_Algorithms.cpp
+        DistortEd_Algorithms/DistortEd_Algorithms.h
+        DistortEd_Algorithms/GainModule.h
+        DistortEd_Algorithms/GainModule.cpp
+        DistortEd_Algorithms/HardClipModule.cpp
+        DistortEd_Algorithms/HardClipModule.h
+        DistortEd_Algorithms/CrushModule.cpp
+        DistortEd_Algorithms/CrushModule.h
+        DistortEd_Algorithms/ToneModule.cpp
+        DistortEd_Algorithms/ToneModule.h
+        DistortEd_Algorithms/FullRectModule.cpp
+        DistortEd_Algorithms/FullRectModule.h
+        )
 
 # `target_compile_definitions` adds some preprocessor definitions to our target. In a Projucer
 # project, these might be passed in the 'Preprocessor Definitions' field. JUCE modules also make use
@@ -113,6 +124,8 @@ target_sources(${projectName}
 # need that's not on by default, check the module header for the correct flag to set here. These
 # definitions will be visible both to your code, and also the JUCE module code, so for new
 # definitions, pick unique names that are unlikely to collide! This is a standard CMake command.
+
+include_directories(${projectName} DistortEd_Algorithms)
 
 target_compile_definitions(${projectName}
         PUBLIC
@@ -136,16 +149,11 @@ target_compile_definitions(${projectName}
 # linked automatically. If we'd generated a binary data target above, we would need to link to it
 # here too. This is a standard CMake command.
 
-include_directories(Wave_io
-        DistortEd_Algorithms
-        )
-
 target_link_libraries(${projectName}
-        PUBLIC
-        DistortEd_Algorithmslib
         PRIVATE
         # AudioPluginData           # If we'd created a binary data target, we'd link to it here
         juce::juce_audio_utils
+        juce::juce_dsp
         PUBLIC
         juce::juce_recommended_config_flags
         juce::juce_recommended_lto_flags

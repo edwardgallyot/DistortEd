@@ -6,6 +6,7 @@
 #define DISTORTED_BASEPROCESSOR_H
 
 #include <JuceHeader.h>
+#include "DSPModules.h"
 
 class BaseProcessor : virtual public juce::AudioProcessor
 {
@@ -30,7 +31,6 @@ class BaseProcessor : virtual public juce::AudioProcessor
     //==============================================================================
     void getStateInformation (juce::MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
-
 
 };
 

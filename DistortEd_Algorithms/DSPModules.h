@@ -7,5 +7,9 @@
 
 #include "GainModule.h"
 #include "CubicModule.h"
+#include "HardClipModule.h"
+#include "CrushModule.h"
+#include "ToneModule.h"
+#include "FullRectModule.h"
 
 #endif //DISTORTED_DSPMODULES_H
