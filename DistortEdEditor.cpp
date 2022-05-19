@@ -26,7 +26,8 @@ DistortEdEditor::~DistortEdEditor ()
 void DistortEdEditor::paint (juce::Graphics& g)
 {
     // (Our component is opaque, so we must completely fill the background with a solid colour)
-    g.fillAll (getLookAndFeel ().findColour (juce::ResizableWindow::backgroundColourId));
+//    g.fillAll (getLookAndFeel ().findColour (juce::ResizableWindow::backgroundColourId));
+    g.fillAll(juce::Colours::maroon);
 }
 
 void DistortEdEditor::resized ()
